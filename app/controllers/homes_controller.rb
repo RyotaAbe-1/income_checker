@@ -74,7 +74,7 @@ class HomesController < ApplicationController
     # 所得控除(社会保険料控除＋基礎控除)
     @income_deduction = @social_insurance_deduction + @basic_deduction
     
-    # 課税所得(給与所得ー所得控除)
+    # 課税所得(給与所得ー所得控除)　1000円未満切捨て
     @taxable_income = (@employment_income - @income_deduction).floor(-3)
     
     # 所得税
@@ -95,6 +95,15 @@ class HomesController < ApplicationController
     end
     
     @income_tax = income_tax.floor
+    
+    # 復興特別所得税
+    @extra_income_tax = (@income_tax * 0.021).floor
+    
+    # 合計納付額(所得税＋復興特別所得税) 100円未満切捨て
+    @total_tax = (@income_tax + @extra_income_tax).floor(-2)
+    
+    # 手取り額
+    @net_income = @face_value_y - @social_insurance_deduction - @total_tax
     
   end
 end
