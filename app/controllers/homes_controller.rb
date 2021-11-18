@@ -19,10 +19,15 @@ class HomesController < ApplicationController
 
     # 介護保険料
     age_range = params[:age_range]
-    if age_range == "40_to_65"
+    if age_range == "under_40"
+      @standard_reward_bymonth_ni = 0
+      @nursing_insurance = 0
+    elsif age_range == "40_to_65"
       @standard_reward_bymonth_ni = InsuranceFee.where("first_range <= ?", face_value_m).last.standard_reward_bymonth
       @nursing_insurance = (@standard_reward_bymonth_ni * 1.8 / 100 / 2 * 12).floor
     elsif age_range == "and_over_65"
+      @standard_reward_bymonth_ni = 0
+      @nursing_insurance = 6014 * 12
       flash[:notice] = "前年の所得や市区町村ごとに変化します。全国平均は6014円/月です。"
     end
 
@@ -49,7 +54,7 @@ class HomesController < ApplicationController
       @face_value_deduction = 1950000
     end
     
-    # 給与所得
+    # 給与所得(給与収入ー給与所得控除)
     @employment_income = @face_value_y - @face_value_deduction
     
     # 社会保険料控除 介護保険料のnillを0に
@@ -70,7 +75,26 @@ class HomesController < ApplicationController
     @income_deduction = @social_insurance_deduction + @basic_deduction
     
     # 課税所得(給与所得ー所得控除)
-    @taxable_income = @employment_income - @income_deduction
+    @taxable_income = (@employment_income - @income_deduction).floor(-3)
+    
+    # 所得税
+    if (1000...1950000) === @taxable_income
+      income_tax = @taxable_income * 0.05
+    elsif (1950000...3300000) === @taxable_income
+      income_tax = @taxable_income * 0.1 - 97500
+    elsif (3300000...6950000) === @taxable_income
+      income_tax = @taxable_income * 0.2 - 427500
+    elsif (6950000...9000000) === @taxable_income
+      income_tax = @taxable_income * 0.23 - 636000
+    elsif (9000000...18000000) === @taxable_income
+      income_tax = @taxable_income * 0.33 - 1536000
+    elsif (18000000...40000000) === @taxable_income
+      income_tax = @taxable_income * 0.4 - 2796000
+    elsif 40000000 <= @taxable_income
+      income_tax = @taxable_income * 0.45 - 4796000
+    end
+    
+    @income_tax = income_tax.floor
     
   end
 end
