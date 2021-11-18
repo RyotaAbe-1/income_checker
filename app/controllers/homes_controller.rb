@@ -48,8 +48,29 @@ class HomesController < ApplicationController
     elsif 8500000 < @face_value_y
       @face_value_deduction = 1950000
     end
-
+    
+    # 給与所得
+    @employment_income = @face_value_y - @face_value_deduction
+    
     # 社会保険料控除 介護保険料のnillを0に
     @social_insurance_deduction = @welfare_pension + @helth_insurance + @nursing_insurance.to_i + @employment_insurance
+    
+    # 基礎控除
+    if @face_value_y <= 24000000
+      @basic_deduction = 480000
+    elsif 24000000 < @face_value_y && @face_value_y <= 24500000
+      @basic_deduction = 320000
+    elsif 24500000 < @face_value_y && @face_value_y <= 25000000
+      @basic_deduction = 160000
+    elsif 25000000 < @face_value_y
+      @basic_deduction = 0
+    end
+    
+    # 所得控除(社会保険料控除＋基礎控除)
+    @income_deduction = @social_insurance_deduction + @basic_deduction
+    
+    # 課税所得(給与所得ー所得控除)
+    @taxable_income = @employment_income - @income_deduction
+    
   end
 end
