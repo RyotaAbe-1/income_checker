@@ -1,1 +1,7 @@
 <h1>手取りチェッカー</h1>
+<%= form_with url: result_path, local: true do |f| %>
+  <%= f.number_field :face_value %>
+  <%= f.select :age_range, [["40歳未満", "under_40"], ["40歳以上65歳未満", "40_to_65"], ["65歳以上", "and_over_65"]], prompt: "年齢区分を選択してください。" %>
+  <%= f.select :profession, [["一般", "general"], ["農林水産・清酒製造", "agriculture"], ["建設", "construction"]], prompt: "職種を選択してください。" %>
+  <%= f.submit "調べる" %>
+<% end %>

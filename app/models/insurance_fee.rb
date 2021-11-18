@@ -1,0 +1,2 @@
+class InsuranceFee < ApplicationRecord
+end
