@@ -1,6 +1,8 @@
 <%= "額面：#{@face_value_y}円/年" %>
-<%= "給与所得控除額：#{@face_value_deduction}円" %>
-<%= "給与所得(額面ー給与所得)：#{@face_value_y - @face_value_deduction}円" %>
+<%= "給与所得控除：#{@face_value_deduction}円" %>
+<%= "給与所得(額面ー給与所得控除額)：#{@face_value_y - @face_value_deduction}円" %>
+<div>所得控除</div>
+<%= "社会保険料控除：#{@social_insurance_deduction}" %>
 
 <%= "厚生年金保険料の標準報酬月額：#{@standard_reward_bymonth_wp}円" %>
 <%= "健康保険料の標準報酬月額：#{@standard_reward_bymonth_hi}円" %>
@@ -9,4 +11,5 @@
 <%= "健康保険料：#{@helth_insurance}円/年" %>
 <%= "介護保険料：#{@nursing_insurance}円/年" %>
 <%= "雇用保険料：#{@employment_insurance}円/年" %>
+
 
