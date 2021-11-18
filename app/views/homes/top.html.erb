@@ -1,4 +1,5 @@
 <h1>手取りチェッカー</h1>
+<div>令和3年4月1日現在法令等に基づいて算出します。</div>
 <%= form_with url: result_path, local: true do |f| %>
   <%= f.number_field :face_value %>
   <%= f.select :age_range, [["40歳未満", "under_40"], ["40歳以上65歳未満", "40_to_65"], ["65歳以上", "and_over_65"]], prompt: "年齢区分を選択してください。" %>
