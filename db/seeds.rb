@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-standard_reward_bymonth = [
+standard_rewards = [
   58000,
   68000,
   78000,
@@ -59,7 +59,7 @@ standard_reward_bymonth = [
   1390000
 ]
 
-first = [
+first_ranges = [
   0,
   63000,
   73000,
@@ -112,7 +112,7 @@ first = [
   1355000
 ]
 
-last = [
+last_ranges = [
   63000,
   73000,
   83000,
@@ -162,13 +162,13 @@ last = [
   1235000,
   1295000,
   1355000,
-  Float::INFINITY
+  0
 ]
 
 50.times do |n|
   InsuranceFee.create!(
-    standard_reward_bymonth: standard_reward_bymonth[n],
-    first: first[n],
-    last: last[n]
+    standard_reward_bymonth: standard_rewards[n],
+    first_range: first_ranges[n],
+    last_range: last_ranges[n]
   )
 end

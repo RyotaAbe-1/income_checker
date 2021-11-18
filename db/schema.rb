@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_141723) do
+ActiveRecord::Schema.define(version: 2021_11_17_172602) do
 
   create_table "insurance_fees", force: :cascade do |t|
-    t.float "standard_reward_bymonth"
-    t.float "first"
-    t.float "last"
+    t.integer "standard_reward_bymonth"
+    t.integer "first_range"
+    t.integer "last_range"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

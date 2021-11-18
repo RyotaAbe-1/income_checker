@@ -4,6 +4,10 @@ class HomesController < ApplicationController
 
   def result
     face_value = params[:face_value].to_i
-    @result = (face_value * 0.8).floor
+    if face_value < 1355000
+      @standard = InsuranceFee.where("first_range <= ? and last_range > ?", face_value, face_value).first
+    else
+      @standard = InsuranceFee.where("first_range <= ?", face_value).first
+    end
   end
 end
