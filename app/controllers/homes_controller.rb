@@ -21,6 +21,13 @@ class HomesController < ApplicationController
     elsif age_range == "and_over_65"
       flash[:notice] = "前年の所得や市区町村ごとに変化します。全国平均は6014円/月です。"
     end
+    
+    profession = params[:profession]
+    if profession == "general"
+      @employment_insurance = face_value * 3 / 1000
+    else
+      @employment_insurance = face_value * 4 / 1000
+    end
       
   end
 end
