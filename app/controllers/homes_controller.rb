@@ -19,14 +19,12 @@ class HomesController < ApplicationController
 
     # 介護保険料
     age_range = params[:age_range]
-    if age_range == "under_40"
-      @standard_reward_bymonth_ni = 0
-      @nursing_insurance = 0
-    elsif age_range == "40_to_65"
+    @standard_reward_bymonth_ni = 0
+    @nursing_insurance = 0
+    if age_range == "40_to_65"
       @standard_reward_bymonth_ni = InsuranceFee.where("first_range <= ?", face_value_m).last.standard_reward_bymonth
       @nursing_insurance = (@standard_reward_bymonth_ni * 1.8 / 100 / 2 * 12).floor
     elsif age_range == "and_over_65"
-      @standard_reward_bymonth_ni = 0
       @nursing_insurance = 6014 * 12
       flash[:notice] = "前年の所得や市区町村ごとに変化します。全国平均は6014円/月です。"
     end
@@ -35,7 +33,7 @@ class HomesController < ApplicationController
     profession = params[:profession]
     if profession == "general"
       @employment_insurance = (face_value_m * 3 / 1000 * 12).floor
-    else
+    elsif (profession == "agriculture") or (profession == "construction")
       @employment_insurance = (face_value_m * 4 / 1000 * 12).floor
     end
 
@@ -57,8 +55,8 @@ class HomesController < ApplicationController
     # 給与所得(給与収入ー給与所得控除)
     @employment_income = @face_value_y - @face_value_deduction
 
-    # 社会保険料控除 介護保険料のnillを0に
-    @social_insurance_deduction = @welfare_pension + @helth_insurance + @nursing_insurance.to_i + @employment_insurance
+    # 社会保険料控除
+    @social_insurance_deduction = @welfare_pension + @helth_insurance + @nursing_insurance + @employment_insurance
 
     # 基礎控除
     if @face_value_y <= 24000000
