@@ -1,3 +1,5 @@
+
+
 <%= "給与収入(額面)：#{@face_value_y.to_s(:delimited)}円/年" %><br>
 <%= "給与所得控除：#{@face_value_deduction.to_s(:delimited)}円" %><br>
 <%= "給与所得(給与収入ー給与所得控除)：#{@employment_income.to_s(:delimited)}円" %><br>
@@ -9,7 +11,7 @@
 <%= "課税所得(給与所得ー所得控除)：#{@taxable_income.to_s(:delimited)}円" %><br>
 <%= "所得税：#{@income_tax.to_s(:delimited)}円" %><br>
 <%= "復興特別所得税：#{@extra_income_tax}円" %><br>
-<%= "手取り額(給与収入ー社会保険料ー所得税・復興特別所得税)：#{@net_income}" %><br>
+<%= "手取り額(給与収入ー社会保険料ー所得税・復興特別所得税)：#{@net_income.to_s(:delimited)}円" %><br>
 
 <div>社会保険料内訳</div>
 <%= "厚生年金保険料の標準報酬月額：#{@standard_reward_bymonth_wp.to_s(:delimited)}円" %><br>
@@ -17,6 +19,8 @@
 <%= "介護保険料の標準報酬月額：#{@standard_reward_bymonth_ni.to_s(:delimited)}円" %><br>
 <%= "厚生年金保険料：#{@welfare_pension.to_s(:delimited)}円/年" %><br>
 <%= "健康保険料：#{@helth_insurance.to_s(:delimited)}円/年" %><br>
+
+<%= flash[:notice] %>
 <%= "介護保険料：#{@nursing_insurance.to_s(:delimited)}円/年" %><br>
 <%= "雇用保険料：#{@employment_insurance.to_s(:delimited)}円/年" %><br>
 
