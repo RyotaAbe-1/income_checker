@@ -9,7 +9,7 @@
 <%= "課税所得(給与所得ー所得控除)：#{@taxable_income.to_s(:delimited)}円" %><br>
 <%= "所得税：#{@income_tax.to_s(:delimited)}円" %><br>
 <%= "復興特別所得税：#{@extra_income_tax}円" %><br>
-<%= "手取り額(給与収入ー社会保険料ー所得税・復興特別所得税)：#{@net_income}" %><br>
+<%= "手取り額(給与収入ー社会保険料ー所得税・復興特別所得税)：#{@net_income.to_s(:delimited)}円" %><br>
 
 <div>社会保険料内訳</div>
 <%= "厚生年金保険料の標準報酬月額：#{@standard_reward_bymonth_wp.to_s(:delimited)}円" %><br>
