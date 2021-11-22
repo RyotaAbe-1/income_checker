@@ -31,11 +31,41 @@
   padding: 10px;
 }
 
+.overview {
+  padding: 15px;
+}
+
 .caution {
-  margin: 30px 0 30px 0;
+  padding: 15px;
 }
 
 .form {
   width: 600px;
   margin: 15px auto;
+}
+
+.result {
+  text-align: center;
+  margin: 15px;
+}
+
+.result span {
+  color: red;
+  font-size: 30px;
+}
+
+.detail {
+  padding: 15px;
+}
+
+.tax {
+  padding: 15px;
+}
+
+.insurance {
+  padding: 15px;
+}
+
+.insurance span {
+  font-size: 15px;
 }
