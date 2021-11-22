@@ -13,3 +13,59 @@
  *= require_tree .
  *= require_self
  */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid black;
+}
+
+.title {
+  padding: 10px;
+}
+
+.overview {
+  padding: 15px;
+}
+
+.caution {
+  padding: 15px;
+}
+
+.form {
+  width: 600px;
+  margin: 15px auto;
+}
+
+.result {
+  text-align: center;
+  margin: 15px;
+}
+
+.result span {
+  color: red;
+  font-size: 30px;
+}
+
+.detail {
+  padding: 15px;
+}
+
+.tax {
+  padding: 15px;
+}
+
+.insurance {
+  padding: 15px;
+}
+
+.insurance span {
+  font-size: 15px;
+}

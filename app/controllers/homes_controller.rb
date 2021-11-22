@@ -26,7 +26,7 @@ class HomesController < ApplicationController
       @nursing_insurance = (@standard_reward_bymonth_ni * 1.8 / 100 / 2 * 12).floor
     elsif age_range == "and_over_65"
       @nursing_insurance = 6014 * 12
-      flash[:notice] = "前年の所得や市区町村ごとに変化します。全国平均は6014円/月です。"
+      flash[:notice] = "※介護保険料は前年の所得や市区町村ごとに変化します。全国平均の6014円/月で計算しています。"
     end
 
     # 雇用保険料
@@ -92,7 +92,7 @@ class HomesController < ApplicationController
       income_tax = @taxable_income * 0.45 - 4796000
     end
 
-    @income_tax = income_tax.floor
+    @income_tax = income_tax.to_i.floor
 
     # 復興特別所得税
     @extra_income_tax = (@income_tax * 0.021).floor

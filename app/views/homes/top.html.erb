@@ -1,8 +1,20 @@
-<h1>手取りチェッカー</h1>
-<div>令和3年4月1日現在法令等に基づいて算出します。</div>
-<%= form_with url: result_path, local: true do |f| %>
-  <%= f.number_field :face_value %>
-  <%= f.select :age_range, [["40歳未満", "under_40"], ["40歳以上65歳未満", "40_to_65"], ["65歳以上", "and_over_65"]] %>
-  <%= f.select :profession, [["一般", "general"], ["農林水産・清酒製造", "agriculture"], ["建設", "construction"]] %>
-  <%= f.submit "調べる" %>
-<% end %>
+<div class=container>
+  <h1 class="title">手取りチェッカー</h1>
+  <div class="overview">
+    額面金額から手取りを計算できます。<br>
+    額面金額を入力し、年齢と職種を選択してください。
+  </div>
+  <div class="caution">
+    ※令和3年4月1日現在法令等に基づいて算出します。<br>
+    ※厚生年金保険料、健康保険料、介護保険料は東京の保険料額表を元に算出しております。
+  </div>
+  <div class="form">
+    <%= form_with url: result_path, local: true do |f| %>
+    <%= f.number_field :face_value %>
+    <%= f.select :age_range, [["40歳未満", "under_40"], ["40歳以上65歳未満", "40_to_65"], ["65歳以上", "and_over_65"]] %>
+    <%= f.select :profession, [["一般", "general"], ["農林水産・清酒製造", "agriculture"], ["建設", "construction"]] %>
+    <%= f.submit "調べる" %>
+  <% end %>
+  </div>
+</div>
+
